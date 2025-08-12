@@ -30,7 +30,7 @@ mc_length_8_20 <- data.frame(mack_verts$length1[8:20])
 mc_length_8_20
 
 mc_dates <- mack_verts$sampledate
-mc_dates
+head(mc_dates, 6L)
 ```
 
 ## Make a salamander subset
