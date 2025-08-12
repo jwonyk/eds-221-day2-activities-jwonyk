@@ -46,3 +46,4 @@ ggplot(data = mc_salamanders, aes(x = length1, y = weight)) +
        y = "weight (g)")
 ggsave(here::here("figs", "wild_data.png"), height = 6, width = 7)
 ```
+
