@@ -1,0 +1,48 @@
+---
+title: "Wild Data"
+author: "J"
+format: html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(tidyverse)
+library(here)
+library(janitor)
+library(dplyr)
+```
+
+## Read in the data & check
+```{r}
+mack_verts <- read_csv(here::here("data", "AS00601.csv"))
+view(mack_verts)
+```
+
+## A bit of wrangling & exploring
+```{r}
+mack_verts <- mack_verts %>% clean_names()
+mack_verts
+
+mc_wt_5 <- mack_verts$weight[5]
+mc_wt_5
+
+mc_length_8_20 <- data.frame(mack_verts$length1[8:20])
+mc_length_8_20
+
+mc_dates <- mack_verts$sampledate
+mc_dates
+```
+
+## Make a salamander subset
+```{r}
+mc_salamanders <- mack_verts[mack_verts$species == "DITE", ]
+mc_salamanders
+
+ggplot(data = mc_salamanders, aes(x = length1, y = weight)) +
+  geom_point(aes(color = length1), size = 4, alpha = 0.6) +
+  labs(title = "Aquatic Vertebrate Population Study in Mack Creek",
+       subtitle = "salamander length x weight",
+       x = "snout-vent length (mm)",
+       y = "weight (g)")
+ggsave(here::here("figs", "wild_data.png"), height = 6, width = 7)
+```
